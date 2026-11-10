@@ -1,0 +1,6 @@
+# Replace @your-handle. Changes to these paths need this owner's review.
+/docs/context/   @your-handle
+/.claude/        @your-handle
+/.githooks/      @your-handle
+/.github/        @your-handle
+/AGENTS.md       @your-handle

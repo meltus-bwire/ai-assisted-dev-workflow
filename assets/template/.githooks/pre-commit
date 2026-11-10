@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# Enforces branch naming and one file per commit.
+set -euo pipefail
+dir="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+# shellcheck source=/dev/null
+source "$dir/config.sh"
+
+fail() { echo "commit rejected: $1" >&2; exit 1; }
+
+git rev-parse -q --verify MERGE_HEAD >/dev/null && exit 0
+
+branch="$(git symbolic-ref --short -q HEAD || true)"
+re="^(${BRANCH_PREFIXES})/[a-z0-9][a-z0-9._-]*$"
+[[ "$branch" =~ $re ]] || fail "branch '${branch:-detached HEAD}' is not allowed. Use <prefix>/<issue>-<description>; prefixes: ${BRANCH_PREFIXES//|/, }."
+
+count="$(git diff --cached --name-only -M | wc -l | tr -d ' ')"
+(( count <= 1 )) || fail "${count} files staged. Commit one file at a time (git add <path>)."

@@ -1,0 +1,12 @@
+# Make this a required status check in branch protection.
+name: commit-rules
+on: pull_request
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.event.pull_request.head.sha }}
+      - run: bash .githooks/check-pr.sh "origin/${{ github.base_ref }}"
