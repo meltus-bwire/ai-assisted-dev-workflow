@@ -1,7 +1,7 @@
 ---
 name: ai-assisted-dev-workflow
 description: Sets up and maintains an enforceable workflow for AI coding agents in a git repository - context files (AGENTS.md, workflow rules, project overview, architecture, code standards, git workflow, UI context, progress tracker), git hooks, a CI check, CODEOWNERS, and Claude Code permission settings. Use this whenever the user wants guardrails or rules for AI-assisted development, wants to stop an agent editing files it should not touch, reading secrets, or working outside the project, wants to enforce branch naming, conventional or gitmoji commits, one file per commit, or no AI attribution, asks to create or fill in AGENTS.md, CLAUDE.md, or project context files, or is adopting AI coding agents in a new or existing project, even if they never name this workflow.
-license: MIT. See LICENSE.txt.
+license: MIT. See LICENSE.
 compatibility: Needs git and bash (Git Bash on Windows). Installing into a project needs file and shell access to that repository.
 ---
 

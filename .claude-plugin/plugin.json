@@ -1,0 +1,13 @@
+{
+  "name": "ai-assisted-dev-workflow",
+  "displayName": "AI-Assisted Dev Workflow",
+  "description": "Enforceable guardrails for AI coding agents: context files, git hooks, a CI check, CODEOWNERS, and Claude Code permission settings.",
+  "author": {
+    "name": "Meltus Bwire",
+    "url": "https://github.com/meltus-bwire"
+  },
+  "homepage": "https://github.com/meltus-bwire/ai-assisted-dev-workflow",
+  "repository": "https://github.com/meltus-bwire/ai-assisted-dev-workflow",
+  "license": "MIT",
+  "keywords": ["agents-md", "guardrails", "git-hooks", "conventional-commits", "workflow"]
+}

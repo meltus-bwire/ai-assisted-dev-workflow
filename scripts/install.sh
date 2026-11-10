@@ -27,7 +27,7 @@ target="$(cd "$target" && pwd)"
 marker='ai-assisted-dev-workflow:start'
 manual=()
 
-is_managed()    { case "$1" in .githooks/config.sh) return 1 ;; .githooks/*|.github/workflows/commit-rules.yml) return 0 ;; *) return 1 ;; esac; }
+is_managed()    { case "$1" in .githooks/config.sh) return 1 ;; .githooks/*|.github/workflows/commit-rules.yaml) return 0 ;; *) return 1 ;; esac; }
 is_line_merge() { case "$1" in .gitignore|.gitattributes) return 0 ;; *) return 1 ;; esac; }
 say()  { printf '  %-10s %s\n' "$1" "$2"; }
 run()  { (( dry )) || "$@"; }

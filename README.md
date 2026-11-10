@@ -47,7 +47,7 @@ your-project/
 │  └─ check-pr.sh                 runs all rules over a pull request
 ├─ .github/
 │  ├─ CODEOWNERS                  owner review for the kit's files
-│  └─ workflows/commit-rules.yml  CI check
+│  └─ workflows/commit-rules.yaml CI check
 └─ docs/
    ├─ progress-tracker.md         what changed in the project, one line per task
    └─ context/
@@ -68,14 +68,63 @@ Each context file covers one subject and is written as instructions, not descrip
 - Optional: Claude Code, for `.claude/settings.json`. Its sandbox needs `bubblewrap` and `socat` on Linux, and WSL2 on Windows.
 - Optional: GitHub, for the CI workflow and `CODEOWNERS`.
 
+## Install the skill
+
+This repository is an [Agent Skill](https://agentskills.io): `SKILL.md` sits at the root with the installer and templates beside it. Install it into your agent once, then ask the agent to set up the workflow in a project, and it runs the steps under [Setup](#setup) for you.
+
+### Claude Code
+
+```
+/plugin marketplace add meltus-bwire/ai-assisted-dev-workflow
+/plugin install ai-assisted-dev-workflow@meltus-bwire
+```
+
+On Claude Code 2.1.275 or later, one command does both:
+
+```
+/plugin install ai-assisted-dev-workflow --marketplace meltus-bwire/ai-assisted-dev-workflow
+```
+
+To pick up later changes, run `/plugin marketplace update meltus-bwire`.
+
+### Codex, Cursor, Claude Code and other agents
+
+The [skills CLI](https://github.com/vercel-labs/skills) installs into whichever agents you use:
+
+```bash
+npx skills add meltus-bwire/ai-assisted-dev-workflow
+```
+
+Add `-g` to install for your user instead of the current project, or `-a <agent>` to pick the agent.
+
+### Claude.ai and the Claude desktop app
+
+Download [`ai-assisted-dev-workflow.zip`](https://github.com/meltus-bwire/ai-assisted-dev-workflow/releases/latest/download/ai-assisted-dev-workflow.zip) from the latest release, then upload it in **Customize > Skills**. GitHub's own "Download ZIP" button does not work here: its folder is named `ai-assisted-dev-workflow-main`, and the upload needs the folder name to match the skill name.
+
+To build the ZIP for a release:
+
+```bash
+git archive --prefix=ai-assisted-dev-workflow/ -o ai-assisted-dev-workflow.zip HEAD -- . ':!.claude-plugin' ':!CLAUDE.md'
+```
+
+### By hand
+
+Clone the repository into your agent's skills folder, for example for Claude Code:
+
+```bash
+git clone https://github.com/meltus-bwire/ai-assisted-dev-workflow.git ~/.claude/skills/ai-assisted-dev-workflow
+```
+
 ## Setup
 
 ### 1. Install into your project
 
+If you installed the skill, ask your agent to do this. To run it by hand:
+
 ```bash
 git clone https://github.com/meltus-bwire/ai-assisted-dev-workflow.git
-bash ai-assisted-dev-workflow/install.sh --dry-run /path/to/project   # preview, changes nothing
-bash ai-assisted-dev-workflow/install.sh /path/to/project
+bash ai-assisted-dev-workflow/scripts/install.sh --dry-run /path/to/project   # preview, changes nothing
+bash ai-assisted-dev-workflow/scripts/install.sh /path/to/project
 ```
 
 The installer is safe to run on an existing project. See [What the installer does to existing files](#what-the-installer-does-to-existing-files).
@@ -192,7 +241,7 @@ Keep `config.sh` and `git-workflow.md` in agreement: the first is what the hooks
 
 ```bash
 git -C ai-assisted-dev-workflow pull
-bash ai-assisted-dev-workflow/install.sh --update /path/to/project
+bash ai-assisted-dev-workflow/scripts/install.sh --update /path/to/project
 ```
 
 `--update` replaces only the hook scripts and the CI workflow. Context files, `config.sh`, and settings are never replaced.

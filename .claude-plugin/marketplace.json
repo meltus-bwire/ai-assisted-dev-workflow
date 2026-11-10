@@ -1,0 +1,16 @@
+{
+  "name": "meltus-bwire",
+  "description": "Skills and plugins by Meltus Bwire",
+  "owner": {
+    "name": "Meltus Bwire",
+    "url": "https://github.com/meltus-bwire"
+  },
+  "plugins": [
+    {
+      "name": "ai-assisted-dev-workflow",
+      "source": "./",
+      "description": "Enforceable guardrails for AI coding agents: context files, git hooks, a CI check, CODEOWNERS, and Claude Code permission settings.",
+      "category": "development"
+    }
+  ]
+}

@@ -47,7 +47,7 @@ your-project/
 │  └─ check-pr.sh                 runs all rules over a pull request
 ├─ .github/
 │  ├─ CODEOWNERS                  owner review for the kit's files
-│  └─ workflows/commit-rules.yml  CI check
+│  └─ workflows/commit-rules.yaml CI check
 └─ docs/
    ├─ progress-tracker.md         what changed in the project, one line per task
    └─ context/
